@@ -1,101 +1,96 @@
-
 {% extends 'dashboard_base.html' %}
 {% block extra_body %}
 {% load crispy_forms_tags%}
 {% load humanize %}
 {% load static %}
 <style> 
-
-.answers{color:red;}
+   .answers{color:red;}
 </style>
-
- 
 <div class="container card" style="padding:20px;">
-  <h2> Oversubscription Reallocation Calculator Assignment  </h2>
-
-  <p> The Below outlines details of the assignments; requirements and feedback.
-  <p> 
-    <h2> 
-    About this project
-  </h2> 
-  <ul>
-    <li> 
- - You should spend about three hours on this. <br> 
- <p style="color:red;"> I spent approximately 3-4 hours on this project </p>
-</li>
-<li> 
- - Please comment your code where appropriate to help us understand your decision-making.
- <p style="color:red;">I tried to comment code to align with decision makeing.  </p>
-</li> 
-<li> 
- - Part 3 does not require coding. Instead, write your answers in the text files in the `answers` directory.
- <p style="color:red;">I have written my answers in the text files in the `answers` directory and in red below.  </p>
- </li>
+<h2> Oversubscription Reallocation Calculator Assignment  </h2>
+<p> The Below outlines details of the assignments; requirements and feedback.
+<p> 
+<h2> 
+   About this project
+</h2>
+<ul>
+   <li>
+      - You should spend about three hours on this. <br> 
+      <p style="color:red;"> I spent approximately 3-4 hours on this project </p>
+   </li>
+   <li>
+      - Please comment your code where appropriate to help us understand your decision-making.
+      <p style="color:red;">I tried to comment code to align with decision makeing.  </p>
+   </li>
+   <li>
+      - Part 3 does not require coding. Instead, write your answers in the text files in the `answers` directory.
+      <p style="color:red;">I have written my answers in the text files in the `answers` directory and in red below.  </p>
+   </li>
 </ul>
 <h2>  Allocation proration tool </h2>
 <p> 
-When we raise money for startups on AngelList, there is always a target amount that we're trying to 
-raise. This amount is called the **allocation** and it represents the total amount of 
-money we are allowed to raise for a particular startup. 
-</p><p> 
-Suppose we have a group of investors on AngelList who invest in all deals that they see. Each of the
-investors have a **requested amount**, which represents the amount of money they want to invest into
-a particular deal.
-</p><p> 
-When the allocation is greater than the sum of all the investors' requested amounts, everyone can 
-invest what they asked for. However, when there is limited allocation we need to **prorate all of 
-the available allocation** between the investors.
-</p><p> 
-We want to maximize fairness, so we always use the historical **average investment amount** 
-of that investor as the basis for proration. Here is a simple example: 
-</p><p> 
-```
-Available allocation: $100 <br> 
-Investor A requested to invest $150 <br> 
-Investor B requested to invest $50 <br> 
-<br> 
-<br> 
-
-Investor A has a historical average investment size of $100
-<br> 
-Investor B has a historical average investment size of $25 <br> 
-<br> 
-<br> 
-After proration: <br> 
-Investor A will invest $100 * (100 / (100 + 25)) = $80<br> 
-Investor B will invest $100 * (25 / (100 + 25)) = $20<br> 
-<br> 
-
+   When we raise money for startups on AngelList, there is always a target amount that we're trying to 
+   raise. This amount is called the allocation and it represents the total amount of 
+   money we are allowed to raise for a particular startup. 
+</p>
+<p> 
+   Suppose we have a group of investors on AngelList who invest in all deals that they see. Each of the
+   investors have a **requested amount**, which represents the amount of money they want to invest into
+   a particular deal.
+</p>
+<p> 
+   When the allocation is greater than the sum of all the investors' requested amounts, everyone can 
+   invest what they asked for. However, when there is limited allocation we need to **prorate all of 
+   the available allocation** between the investors.
+</p>
+<p> 
+   We want to maximize fairness, so we always use the historical **average investment amount** 
+   of that investor as the basis for proration. Here is a simple example: 
+</p>
+<p> 
+   ```
+   Available allocation: $100 <br> 
+   Investor A requested to invest $150 <br> 
+   Investor B requested to invest $50 <br> 
+   <br> 
+   <br> 
+   Investor A has a historical average investment size of $100
+   <br> 
+   Investor B has a historical average investment size of $25 <br> 
+   <br> 
+   <br> 
+   After proration: <br> 
+   Investor A will invest $100 * (100 / (100 + 25)) = $80<br> 
+   Investor B will invest $100 * (25 / (100 + 25)) = $20<br> 
+   <br> 
 <h2>  Part 1 (backend) </h2>
 <p> 
-Your mission is to build an efficient algorithm that runs through the proration logic and generates
-the final breakdown of how much money investors are investing in a particular deal.
+   Your mission is to build an efficient algorithm that runs through the proration logic and generates
+   the final breakdown of how much money investors are investing in a particular deal.
 </p>
-
 # Input <br>
 {<br>
-  "allocation_amount": 100,<br>
-  "investor_amounts": [<br>
-    {<br>
-      "name": "Investor A",<br>
-      "requested_amount": 100,<br>
-      "average_amount": 100<br>
-    },<br>
-    {<br>
-      "name": "Investor B",<br>
-      "requested_amount": 25,<br>
-      "average_amount": 25<br>
-    }<br>
-  ]
+"allocation_amount": 100,<br>
+"investor_amounts": [<br>
+{<br>
+"name": "Investor A",<br>
+"requested_amount": 100,<br>
+"average_amount": 100<br>
+},<br>
+{<br>
+"name": "Investor B",<br>
+"requested_amount": 25,<br>
+"average_amount": 25<br>
+}<br>
+]
 }
 <br>
 # Output<br>
 {<br>
-  "Investor A": 80,<br>
-  "Investor B": 20<br>
+"Investor A": 80,<br>
+"Investor B": 20<br>
 }<br>
 <br>
-
 Keep the following things in mind while you implement this algorithm:<br>
 1. No investor should ever have a final amount that is greater than what they requested.<br>
 2. No allocation should be left unused if an investor wants it.<br>
@@ -106,62 +101,55 @@ that we could run into in practice. To help with this, we've included four examp
 and expected outputs for you to use as guidance in the `data/` folder.
 <br> 
 <div class="answers"> 
-This exercise was a fun and challenging one. I enjoyed the process of building the algorithm and the UI. I also enjoyed the writing part of the exercise. The one technical challenge which was presented was thinking about all of the edge cases and ideal UI / Customer interactivity. I realized; that this tool is really an analytic approach on pre-money and post-money valuations. I really thought about the user, and how investors would want to use this platform. The main consideration investors care about is dilution between rounds and what the impact of their participation is. As such I worked to show the multiple effects of establishing a new fundraising round and the potential dilution/changes to all investors.  
-
-<br> The one technical challenging was thinking of all the use + edge cases; and making value justifications for the end product user fit. This included: 
-<ul> 
-  <li> 
-  - The case where  under subscription of the round occurs, where all investors get 100% of requested amounts. 
-    </li> 
-    <li> 
-  - The case which it is oversubscribed; resulting in proration of the allocation. The unique case is that if a person wants to by less then their prorated maximum. Then I simply found all of the ones that get 100% allocation, and then subtracted those from the total and allocated based on historic data of the remaining investors. This was a judgement call; as this will approximate closely a fair and equitable way to split the allocations. I believe this provides a fair and equitable way to split the allocations.
-    </li> 
-    <li>
-
-
-
-  </li>
-</ul>
+   Reflecting on this exercise has been both enjoyable and intellectually stimulating. Building the algorithm and crafting the user interface were particularly rewarding aspects of the process, as was the creative writing component.
+   <br><br>
+   One notable technical challenge arose in considering the myriad edge cases and optimizing the user experience and interface interactions. It dawned on me that this tool essentially serves as an analytical tool for assessing pre-money and post-money valuations. Throughout development, I maintained a keen focus on the end user, particularly investors, and how they would leverage the platform.
+   <br><br>
+   Central to investor concerns is the concept of dilution between funding rounds and understanding the implications of their participation. Consequently, I dedicated significant effort to illustrating the multifaceted effects of initiating a new fundraising round, elucidating the potential dilution and consequential changes for all stakeholders.
+   <br><br>
+   One of the most intricate technical challenges involved addressing various use cases and edge scenarios while ensuring the final product seamlessly aligns with user needs. This encompassed:
+   <br><br>
+   -  Handling cases of under-subscription, where investors receive 100% of their requested amounts. <br> <br>
+   - Addressing oversubscription scenarios, resulting in allocation proration. Notably, I devised a method for handling instances where an investor desires less than their prorated maximum allocation. By meticulously analyzing historical data and making informed judgments, I aimed to distribute allocations in a manner that approximates fairness and equity.
+   In essence, my goal was to design a platform that not only meets the technical requirements but also fosters trust and confidence among users through transparent and equitable allocation processes.
+   <br><br>
 </div>
-
 <br>
-<h2> Part 2 (frontend) </h2> 
-
+<h2> Part 2 (frontend) </h2>
 Now that we have our algorithm in place, we need to build a UI that our internal team can use to 
 determine how much investors are allowed to invest for a deal. Your mission is to build a simple 
 web app that would allow users to submit inputs to generate the breakdown of final amounts. 
-
-
-
 <p style="color:red;"> 
-I worked on building a quick UI which only took me 15 minutes. This UI consisted of jquery to generate more rows of investors' fields, remove new investors, and was developed to be simple and get the point across. I also left some nav bars so it feels like an app; and put some coming soon features so that the user has a reason to seek back this tool in the future. 
+   dedicated half an hour to crafting a streamlined UI that effectively communicates the tool's functionality. Leveraging jQuery, I seamlessly incorporated features allowing users to dynamically add or remove investor fields, ensuring ease of use and efficiency. The design prioritized simplicity while effectively conveying the tool's purpose.
+   Furthermore, I implemented navigation bars to enhance user experience, creating a cohesive app-like environment. Additionally, I strategically included teaser elements for upcoming features, enticing users to revisit the tool in the future, thus fostering ongoing engagement and anticipation.
 </p>
 <br>
-
 <br>
-<h2> Part 3 (writing) <h2> 
-
-<h3>Discovering a bug</h3> 
-
+<h2>
+Part 3 (writing) 
+<h2>
+<h3>Discovering a bug</h3>
 Suppose we discover a bug with our algorithm and investors for two deals had incorrect
 allocations. This means that some of the investors ended up investing more than they were allowed to
 while others invested less than they were allowed to. One of deals happened two years ago and the 
 other one happened two weeks ago. Please describe, in detail, how would you go about correcting this 
 issue and how would you communicate this to the affected customers.
 <br> 
-
 <p class="answers"> 
-
-I would run this app using a postgres database and record all of the activity, as per implemented with this working example. I would also make sure to have users log in with a sign in with a check box saying they agree to the terms of service. In this terms of service, there should be specific terms around; "the final allocations when executed are final". Also prior to execution, I would send everyone an email with a confirmation of the amounts they are investing and % of such. At the same time should there be a serious bug; This way we can see exactly what happened and recall back with an investigation and a report, and a resolution. Given that equity is already distributed, it would likely not be an option to change the holdings of the company. But should there have been an accounting error, or reasonable mistake, I would work with the company who raised the money, raise this to their attention. From an organizational perspective, I would put this process/project management: 
+   To ensure robust functionality and accountability, I plan to deploy this application utilizing a PostgreSQL database to meticulously record all user activity, mirroring the successful implementation demonstrated in our working example.
+   Additionally, I will prioritize user security and compliance by implementing a mandatory login feature, accompanied by a checkbox requiring users to agree to our terms of service. These terms will include specific clauses emphasizing the irrevocability of final allocations upon execution.
+   Prior to execution, I intend to enhance transparency and user confidence by sending confirmation emails detailing the investment amounts and corresponding percentages to all stakeholders. This preemptive measure not only provides clarity but also serves as a safeguard in the event of serious bugs or discrepancies.
+   In the unlikely event of a significant bug, this meticulous record-keeping will enable a swift and thorough investigation, culminating in a comprehensive report and resolution. While it may not be feasible to alter equity distributions once finalized, any accounting errors or genuine mistakes will be promptly addressed in collaboration with the company that raised the funds.
+   From an organizational standpoint, I will prioritize effective project management and process optimization to ensure seamless execution of these procedures. This proactive approach not only safeguards the integrity of our operations but also fosters trust and confidence among our users.
 </p>
-<ul class="answers"> 
-
-  <li> 
-    1. Open a slack channel called Bug Reporting, that has a staff assigned to it; which rotates weekly. This way we can have a dev on call to address any issues. As issues come in; staff can report the bug, and the staff would just go into the database look up the transaction, check to see if it was an issue, provide a resolution and post that on the channel. Then that person would be responsible for the resolution. This doesn't have to be a tech staff; more a customer service staff. 
-    </li> 
-    <li> 
-    2. I would also have a monthly meeting with the team to discuss any issues that came up, and how we can prevent them in the future. 
-    </li> </ul>
+<ul class="answers">
+   <li> 
+      1. Open a slack channel called Bug Reporting, that has a staff assigned to it; which rotates weekly. This way we can have a dev on call to address any issues. As issues come in; staff can report the bug, and the staff would just go into the database look up the transaction, check to see if it was an issue, provide a resolution and post that on the channel. Then that person would be responsible for the resolution. This doesn't have to be a tech staff; more a customer service staff. 
+   </li>
+   <li> 
+      2. I would also have a monthly meeting with the team to discuss any issues that came up, and how we can prevent them in the future. 
+   </li>
+</ul>
 </p>
 <br>
 <h3> Squeezed down </h3>
@@ -173,13 +161,11 @@ the investor? In addition, can you think of a better way we could change the pro
 this could potentially happen less often?   
 <br> 
 <p class="answers"> 
-
-I would respond with message like " I'm sorry to hear that you are not receiving the allocations you have requested. When oversubscribed, we have a policy of allocating shares based on total current holdings of the venture. This is largely based on a preference for startups who typically prefer follow-on investors, and to give first rights to current shareholders. As your basis increases so does your opportunity to invest in the future. I would be happy to jump on a call should you have an interest to discuss how this pro-ration approach is utilized. Furthermore, this policy  incentivizes investors to invest in low capitalized companies, giving them first right to invest based on their total basis. I would be happy to share some deals with you where you can get a high % of basis. As always; I we at AngelList are happy to help you find the right deal for you." 
-<br> 
-With this response I am pacifying their concerns, and also providing them with a solution and pushing them to an action that allows for more deal flow. 
-
+   I would reply with a message expressing empathy: "I regret to learn that you haven't received the allocations you requested. In instances of oversubscription, our policy entails allocating shares based on the total current holdings of the venture. This approach is rooted in our commitment to supporting startups and prioritizing follow-on investors and current shareholders. As your investment basis grows, so does your opportunity to participate in future rounds."
+   To further address your concerns and provide clarity, I'm more than willing to schedule a call to discuss how this proration approach is implemented. Moreover, our policy incentivizes investment in undercapitalized companies, affording investors the first right to invest based on their total basis. I'd be delighted to share some enticing deals with you where you can secure a higher percentage of basis.
+   At AngelList, we're dedicated to helping you find the perfect investment opportunities. Let's collaborate to explore the right deals for you and enhance your investment portfolio."
+   This response aims to assuage concerns, offer a solution, and encourage further engagement, ultimately fostering increased deal flow.
 </p>
-
 <br>
 <h3> Setup </h3>
 <br>
@@ -189,26 +175,14 @@ script to run everything.
 <br>
 When finished, please bundle & email us a zip of the results. 
 <p class="answers"> 
-  I made this in python/django, and made these decision with these considerations in mind: 
-<ul class="answers"> 
-
-<li> 
-
-- I opted for speed / effeciency over an over complicated solution. The infrastructure I choose represents a good MVP, a foundation to build on should there be reason to. I built this as a server rendered app in Python/Django, with a small amount of jquery to provide some front end interactivities. Django offered the right mix of out of the box, simplicity, and ability to rapid prototype. I would likely leave this as a server rendered app, and then once there is market validation; I would build a restful API and a react front end. I would also set up a postgres server (right now it just runs using sqlite3). I would also use a docker container and provide feature development based on road maps.  
-</li>
-<li> 
-- I used functional views instead of classed based views, as the functions have less overhead, and can seriously speed up the page load by not inheriting large classes from django. Furthermore; I tried to keep the code as simple to read as possible. One important factorization of code is the readability and maintainability of the code. Where more complex code is needed, I tried to comment it. It is of note that I would weigh the cost of time and maintainability of a feature; where the algorithm for allocations can likely be much more complex, I would prefer a solution that solves the problem over an over engineering of the solution as that can create much more inefficiencies down the road. 
-</li>
-I also made a docker file to run the app.
- 
-</ul> 
-
-
+   I made this in python/django, and made these decision with these considerations in mind: 
+<ul class="answers">
+   <li> 
+      - I opted for speed / effeciency over an over complicated solution. The infrastructure I choose represents a good MVP, a foundation to build on should there be reason to. I built this as a server rendered app in Python/Django, with a small amount of jquery to provide some front end interactivities. Django offered the right mix of out of the box, simplicity, and ability to rapid prototype. I would likely leave this as a server rendered app, and then once there is market validation; I would build a restful API and a react front end. I would also set up a postgres server (right now it just runs using sqlite3). I would also use a docker container and provide feature development based on road maps.  
+   </li>
+   <li> 
+      - I used functional views instead of classed based views, as the functions have less overhead, and can seriously speed up the page load by not inheriting large classes from django. Furthermore; I tried to keep the code as simple to read as possible. One important factorization of code is the readability and maintainability of the code. Where more complex code is needed, I tried to comment it. It is of note that I would weigh the cost of time and maintainability of a feature; where the algorithm for allocations can likely be much more complex, I would prefer a solution that solves the problem over an over engineering of the solution as that can create much more inefficiencies down the road. 
+   </li>
+</ul>
 </p>
-
-
-  </p>
-
-
-
 {% endblock %}

@@ -35,11 +35,18 @@ issue and how would you communicate this to the affected customers.
 Response
 ~~~~~~~~
 
+I propose implementing the app utilizing a PostgreSQL database to meticulously track all user activity, mirroring the functionality demonstrated in our current operational model. Additionally, I would ensure a streamlined user experience by incorporating a sign-in feature accompanied by a checkbox for users to consent to our terms of service.
 
-I would run this app using a postgres database and record all of the activity, as per implemented with this working example. I would also make sure to have users log in with a sign in with a check box saying they agree to the terms of service. In this terms of service, there should be specific terms around; "the final allocations when executed are final". Also prior to execution, I would send everyone an email with a confirmation of the amounts they are investing and % of such. At the same time there should be a serious bug; This way we can see exactly what happened and recall back with an investigation and a report, and a resolution. Given that equity is already distributed, it would likely not be an option to change the holdings of the company. But should there have been an accounting error, or reasonable mistake, I would work with the company who raised the money, raise this to their attention. From an organizational perspective, I would put this process/project management:
+Within these terms of service, precise language would be outlined, particularly emphasizing the irrevocability of final allocations upon execution. To further enhance transparency and user confidence, prior to any execution, I would initiate an automated email distribution, furnishing investors with a comprehensive breakdown of their investment amounts and corresponding percentages.
 
-    1. Open a slack channel called Bug Reporting, that has a staff assigned to it; which rotates weekly. This way we can have a dev on call to address any issues. As issues come in; staff can report the bug, and the staff would just go into the database, look up the transaction, check to see if it was an issue, provide a resolution and post that on the channel. Then that person would be responsible for the resolution. This doesn't have to be a tech staff; more a customer service staff.
-    2. I would also have a monthly meeting with the team to discuss any issues that came up, and how we can prevent them in the future.
+Simultaneously, a robust contingency plan would be in place to address any unforeseen issues, including the discovery of critical bugs. This strategic approach enables us to conduct thorough investigations, compile detailed reports, and swiftly implement resolutions. Although adjustments to equity distribution may be impractical once finalized, any accounting discrepancies or genuine oversights would be promptly addressed through collaboration with the fundraising entity.
+
+From an organizational standpoint, meticulous project management practices would underpin this entire process, ensuring efficiency, accountability, and ultimately, the integrity of our operations.
+
+    
+1. Establish a dedicated Slack channel named "Bug Reporting" with a designated staff member assigned to it, with rotations on a weekly basis. This ensures we always have a developer available to promptly address any reported issues. As bugs are reported, the assigned staff member would access the database, investigate the transaction in question, provide a resolution, and communicate it within the channel. This responsibility doesn't necessarily fall solely on technical staff; rather, it could involve customer service personnel, ensuring a holistic approach to issue resolution.
+
+2. Implement a monthly team meeting to facilitate open discussions about any encountered issues and brainstorm proactive measures to mitigate them in the future. This collaborative approach fosters a culture of continuous improvement and proactive problem-solving within the team.
 
 # Squeezed Down 
 Prompt
@@ -56,16 +63,14 @@ this could potentially happen less often?
 
 Response
 ~~~~~~~~
+I would respond with empathy, acknowledging your concern about not receiving the allocations you requested. In such situations of oversubscription, our policy prioritizes allocations based on the total current holdings of the venture. This approach is rooted in our commitment to supporting startups and giving precedence to existing shareholders, who often demonstrate a commitment to the company's growth by reinvesting.
 
-I would respond with a message; I'm sorry to hear that you are not receiving the allocations
-you have requested. When oversubscribed, we have a policy of allocating shares based on total 
-current holdings of the venture. This is largely based on a preference for startups who typically
-prefer to follow on investors, and to give first rights to current shareholders. As your basis increases
-so does your opportunity to invest in the future. I would be happy to jump on a call should you have 
-an interest to discuss how this pro-ration approach is utilized. Furthermore, this policy 
-incentivizes investors to invest in low capitalized companies, giving them first right to
-invest based on their total basis. I would be happy to share some deals with you where you
-can get a high % of basis. As always; I we at AngelList are happy to help you find the right deal for you.
+As your investment basis increases, so does your opportunity to participate in future rounds. If you're interested, I'd be more than happy to schedule a call to discuss how this proration approach is implemented in more detail.
 
-With this response I am pacifying their concerns, and also providing them with a solution and pushing them 
-to an action that allows for more deal flow. 
+Moreover, this policy is designed to incentivize investments in early-stage companies, offering existing shareholders the first right to invest based on their cumulative basis. I'd be delighted to share some promising deals with you where you can potentially secure a higher percentage of basis.
+
+Remember, we're here at AngelList to assist you in finding the most suitable investment opportunities tailored to your preferences and goals. Let's explore how we can optimize your investment portfolio together.
+
+
+
+
