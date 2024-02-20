@@ -9,7 +9,7 @@ In terminal follow these commands: <br>
 Note install virtual env here if you don't have it installed https://virtualenv.pypa.io/en/latest/<br>
 `source myenv/bin/activate` <br>
 `pip install -r requirements.txt`<br> 
-copy the contents of example.env file to a new file called .env
+copy the contents of example.env file to a new file called .env <br> 
 `python manage.py runserver` <br>
 
 Navigate to localhost:8000 on your browser. 
@@ -69,3 +69,4 @@ can get a high % of basis. As always; I we at AngelList are happy to help you fi
 
 With this response I am pacifying their concerns, and also providing them with a solution and pushing them 
 to an action that allows for more deal flow. 
+
