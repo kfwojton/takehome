@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+{% load widget_tweaks %}
+
+<!-- ============================================================== -->
+<!-- Top header  -->
+<!-- ============================================================== -->
+
+<!-- ============================ Page Title Start================================== -->
+<div class="page-title" style="background-color:#757575;min-height:auto;" data-overlay="5">
+	
+</div>
+<!-- ============================ Page Title End ================================== -->
+
+<!-- ============================ User Dashboard ================================== -->
+<section class="gray pt-5 pb-5">
+	<div class="container-fluid">
+
+		<div class="row">
+
+			<div class="col-lg-3 col-md-4">
+				<div class="property_dashboard_navbar">
+
+					<div class="dash_user_avater">
+						<img src="https://via.placeholder.com/500x500" class="img-fluid avater" alt="">
+						<h4>{{ request.user.first_name }} {{ request.user.last_name }}</h4>
+						<!-- <span>Canada USA</span> -->
+					</div>
+
+					<div class="dash_user_menues">
+						<ul>
+
+
+							<li class="active" class="active"><a href=/dashboard /><i class="fa fa-tachometer-alt"></i>Allocation Tool</a></li>
+
+							<li class=""><a href=""><i class="fa fa-user-tie"></i>My Profile (coming soon!)</a></li>
+							<li class=""><a href=""><i class="fa fa-bookmark"></i>Organization (coming soon!)</a></li>
+							<li class=""><a href=""><i class="fa fa-credit-card"></i>Billing (coming soon!)</a></li>
+
+
+							<!-- <li><a href="messages.html"><i class="fa fa-envelope"></i>Messages<span class="notti_coun style-3">3</span></a></li>
+							<li><a href="choose-package.html"><i class="fa fa-gift"></i>Choose Package<span class="expiration">10 days left</span></a></li>
+							<li><a href="submit-property-dashboard.html"><i class="fa fa-pen-nib"></i>Submit New Property</a></li>
+							<li><a href="change-password.html"><i class="fa fa-unlock-alt"></i>Change Password</a></li>  -->
+						</ul>
+					</div>
+
+					<!-- <div class="dash_user_footer">
+						<ul>
+							<li><a href="#"><i class="fa fa-power-off"></i></a></li>
+							<li><a href="#"><i class="fa fa-comment"></i></a></li>
+							<li><a href="#"><i class="fa fa-cog"></i></a></li>
+						</ul>
+					</div> -->
+				</div>
+			</div>
+
+			<div class="col-lg-9">
+				{% block extra_body %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

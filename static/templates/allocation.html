@@ -1,0 +1,222 @@
+
+{% extends 'dashboard_base.html' %}
+{% block extra_body %}
+{% load crispy_forms_tags%}
+{% load humanize %}
+{% load static %}
+
+
+ 
+<div class="container card">
+  <h2> Oversubscription Reallocation Calculator </h2>
+
+  <p> The below form provides insight on how over subsriptions will be distributed on Angelist. Fundraising may exceed expectations or targest, and as such AngelList works to provide the most equitable manner to distribute final equity percentages.  When the allocation is greater than the sum of all the investors' requested amounts, everyone can 
+  invest what they asked for. However, when there is limited allocation we need to prorate all of 
+ the available allocation between the investors. Use this handy tool below to caluculate the end distributions and proceeds. 
+
+  </p>
+  <form method="post" id="investorForm">
+      {% csrf_token %}
+      
+      <div class="row" >
+        <div class="col-md-12"  >
+      
+              
+          {{ context.allocation_form.allocation_amount | as_crispy_field }} 
+       </div>
+       </div>
+      <div id="formset">
+           
+   
+        <div class="form-row">
+          <div class="row">
+        
+        {% for form in context.investor_form %}
+        <div class="col-4"> 
+       
+       
+        {{ form | as_crispy_field }}
+        </div>
+        {% endfor %}
+        </div>
+      </div>
+    </div>
+      <div class="row" style="margin-left:2px;"> 
+        
+      <button type="button" class="btn btn-primary" id="addForm">Add Another Investor</button>
+      <button type="button" class="btn btn-danger" id="removeForm">Remove Last Investor</button>
+      <button type="submit" class="btn btn-success">Submit</button> 
+      </div>
+
+      {{ form.errors }}
+     
+  </form>
+</div>
+{% if context.data %}
+<div class="container card">
+  <h2> Results </h2>
+
+  <p> This company is seeking to raise ${{ context.data.total_amount_requested | intcomma }}. The company has raised {{ context.data.total_previous_holdings | intcomma }} in previous rounds. The company has {{ context.data.allocation_amount | intcomma }} available for this round. </p>
+  <table>
+  <thead>
+    <tr>
+      <th> Investor </th>
+      <th> Previous vs Current Holdings </th>
+      <th>Purchase vs Requested </th>
+
+      <th> Ownership Change</th>
+   
+   
+      
+    </tr>
+</thead>
+<tbody>
+  
+  {% for investor in context.data.investor_amounts %}
+    <tr>
+        <td> {{ investor.name }} </td>
+
+
+        <td>
+          <div class="row"> 
+
+            <div class="col-4">
+          
+          ${{ investor.previous_holdings | intcomma}} 
+        </div>
+      <div class="col-2"> >
+        </div>
+        <div class="col-6"> 
+        ${{ investor.post_money_holdings | intcomma}}
+          </div>
+          </div>
+      </td>
+        <td> ${{ investor.final_amount | intcomma }}      
+          {% if investor.final_amount < investor.requested_amount %}
+          <s> ${{ investor.requested_amount | intcomma}} </s>
+          {% endif %}
+        </td>
+        <td> {{ investor.percent_of_previous_round }}% --> {{ investor.post_money_ownership }}%</td>
+        
+        
+    </tr>
+   {% endfor %}
+
+   <tr>
+    <td><b> Total </b>  </td>
+
+    <td>
+      <div class="row"> 
+
+         <div class="col-4">
+          <b>${{ context.data.pre_money_valuation | intcomma }}</b>
+         </div> 
+        <div class="col-2"> 
+          >
+        </div>
+
+        <div class="col-6" > 
+          
+         <b>   ${{ context.data.post_money_valuation | intcomma }} </b>
+        </div>
+    </div>
+    <td>    
+    <b> 
+      
+      ${{ context.data.total_amount_fundraised | intcomma }}
+      
+    </td>
+    
+    <td>  <b> 100% </b></td>
+   
+</tr>
+   
+</tbody>
+  </table>
+  <br> 
+  *Note: that final amounts are based on available amounts at the time of closing using various calculation to ensure the more fair and equitable outcome for all investors. 
+ 
+
+  <div> 
+    <div class="row">
+
+      <div class="col-md-6">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <div id="pre-money-piechart"></div>
+
+       </div>
+      <div class="col-md-6">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <div id="post-money-piechart"></div>
+
+       </div>
+      
+
+      </div>
+
+   </div>
+  </div>
+  {% endif %}
+
+  
+       <script> 
+      
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Investor', 'Investment'],
+          {% for investor in context.data.investor_amounts %}
+          ['{{ investor.name }}', {{ investor.previous_holdings }}],
+          {% endfor %}
+        ]);
+
+        var data2 = google.visualization.arrayToDataTable([
+          ['Investor', 'Investment'],
+          {% for investor in context.data.investor_amounts %}
+          ['{{ investor.name }}', {{ investor.post_money_holdings }}],
+          {% endfor %}
+        ]);
+
+      
+
+        var options = {
+          title: 'Ownership After Investment'
+        };
+
+        var pre_options = {
+          title: 'Ownership Prior to Investment'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('pre-money-piechart'));
+        var chart2 = new google.visualization.PieChart(document.getElementById('post-money-piechart'));
+
+        chart.draw(data, pre_options);
+        chart2.draw(data2, options);
+      }
+      </script>
+<script>
+  $(document).ready(function() {
+      $('#addForm').click(function() {
+          var formCount = $('.form-row').length;
+          var newForm = $('.form-row').first().clone();
+          newForm.find(':input').each(function() {
+              var name = $(this).attr('name').replace('-' + (formCount - 1) + '-', '-' + formCount + '-');
+              var id = 'id_' + name;
+              $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+          });
+          $('#formset').append(newForm);
+      });
+
+      $('#removeForm').click(function() {
+          var formCount = $('.form-row').length;
+          if (formCount > 1) {
+              $('.form-row').last().remove();
+          }
+      });
+  });
+</script>
+
+{% endblock %}
