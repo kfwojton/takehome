@@ -70,3 +70,10 @@ can get a high % of basis. As always; I we at AngelList are happy to help you fi
 With this response I am pacifying their concerns, and also providing them with a solution and pushing them 
 to an action that allows for more deal flow. 
 
+## Parting Notes
+
+This exercise was a fun and challenging one. I enjoyed the process of building the algorithm and the UI. I also enjoyed the writing part of the exercise. The one technical challenge which was presented was thinking about all of the edge cases and ideal UI / Customer interactivity. I realized; that this tool is an analytic approach on pre-money and post-money valuations. I thought about the user, and how investors would want to use this platform. The main consideration investors care about is dilution between rounds and what the impact of their participation is. As such I worked to show the multiple effects of establishing a new fundraising round and the potential dilution/changes to all investors.
+The one technical challenging was thinking of all the use + edge cases; and making value justifications for the end product user fit. This included:
+- The case where under subscription of the round occurs, where all investors get 100% of requested amounts.
+- The case which it is oversubscribed; resulting in proration of the allocation. The unique case is that if a person wants to by less then their prorated maximum. Then I simply found all of the ones that get 100% allocation, and then subtracted those from the total and allocated based on historic data of the remaining investors. This was a judgement call; as this will approximate closely a fair and equitable way to split the allocations. I believe this provides a fair and equitable way to split the allocations. 
+
