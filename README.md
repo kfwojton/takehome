@@ -9,7 +9,7 @@ In terminal follow these commands: <br>
 Note install virtual env here if you don't have it installed https://virtualenv.pypa.io/en/latest/<br>
 `source myenv/bin/activate` <br>
 `pip install -r requirements.txt`<br> 
-copy the contents of example.env file to a new file called .env
+copy the contents of example.env file to a new file called .env <br> 
 `python manage.py runserver` <br>
 
 Navigate to localhost:8000 on your browser. 
@@ -70,7 +70,4 @@ As your investment basis increases, so does your opportunity to participate in f
 Moreover, this policy is designed to incentivize investments in early-stage companies, offering existing shareholders the first right to invest based on their cumulative basis. I'd be delighted to share some promising deals with you where you can potentially secure a higher percentage of basis.
 
 Remember, we're here at AngelList to assist you in finding the most suitable investment opportunities tailored to your preferences and goals. Let's explore how we can optimize your investment portfolio together.
-
-
-
 
