@@ -25,15 +25,14 @@ dotenv_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(dotenv_path)
 #
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.environ.get('DEBUG')
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 
 
-ALLOWED_HOSTS = ['high5-bec261cc5464.herokuapp.com',
-                 'www.highfiveapp.co',
+
+ALLOWED_HOSTS = ['takehome-618be41a1233.herokuapp.com',
                  'localhost',
-                 'wunderlustretreats.com']
+                 ]
 
 
 # Application definition
