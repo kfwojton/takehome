@@ -24,7 +24,7 @@ Download visual studio code, and add the git bash scripting language https://cod
 ## Discovering a Bug 
 
 Prompt
-~~~~~~
+_________
 
 Suppose we discover a bug with our algorithm and investors for two deals had incorrect
 allocations. This means that some of the investors ended up investing more than they were allowed to
@@ -33,7 +33,7 @@ other one happened two weeks ago. Please describe, in detail, how would you go a
 issue and how would you communicate this to the affected customers.
 
 Response
-~~~~~~~~
+__________
 
 
 I would run this app using a postgres database and record all of the activity, as per implemented with this working example. I would also make sure to have users log in with a sign in with a check box saying they agree to the terms of service. In this terms of service, there should be specific terms around; "the final allocations when executed are final". Also prior to execution, I would send everyone an email with a confirmation of the amounts they are investing and % of such. At the same time there should be a serious bug; This way we can see exactly what happened and recall back with an investigation and a report, and a resolution. Given that equity is already distributed, it would likely not be an option to change the holdings of the company. But should there have been an accounting error, or reasonable mistake, I would work with the company who raised the money, raise this to their attention. From an organizational perspective, I would put this process/project management:
@@ -43,7 +43,7 @@ I would run this app using a postgres database and record all of the activity, a
 
 # Squeezed Down 
 Prompt
-~~~~~~
+__________
 
 An angry investor sent us a note about how they keep getting squeezed down to $25K per deal even
 though their requested amount is $100K. Underneath the hood, this was because there's limited
@@ -55,7 +55,7 @@ In addition, can you think of a better way we could change the proration basis l
 this could potentially happen less often?
 
 Response
-~~~~~~~~
+_____________
 
 I would respond with a message; I'm sorry to hear that you are not receiving the allocations
 you have requested. When oversubscribed, we have a policy of allocating shares based on total 
