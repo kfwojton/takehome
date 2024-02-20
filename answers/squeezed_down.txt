@@ -1,0 +1,27 @@
+Prompt
+~~~~~~
+
+An angry investor sent us a note about how they keep getting squeezed down to $25K per deal even
+though their requested amount is $100K. Underneath the hood, this was because there's limited
+allocation (low supply) and a high volume of investors looking to invest (high demand). How should
+we communicate this to an investor in a way that minimizes the damage to our relationship with
+the investor?
+
+In addition, can you think of a better way we could change the proration basis logic so that
+this could potentially happen less often?
+
+Response
+~~~~~~~~
+
+I would respond with message like; I'm sorry to hear that you are not receiving the allocations
+you have requested. When oversubscribed, we have a policy of allocating shares based on total 
+current holdings of the venture. This is largely based on a preference for startups who typically
+prefer to follow on investors, and to give first rights to current shareholders. As your basis increases
+so does your opportunity to invest in the future. I would be happy to jump on a call should you have 
+an interest to discuss how this pro-ration approach is utilized. Furthermore, this policy 
+incentivizes investors to invest in low capitalized companies, giving them first right to
+invest based on their total basis. I would be happy to share some deals with you where you
+can get a high % of basis. As always; I we at AngelList are happy to help you find the right deal for you.
+
+With this response I am pacifying their concerns, and also providing them with a solution and pushing them 
+to an action that allows for more deal flow. 
